@@ -1,0 +1,19 @@
+services:
+  db:
+    restart: unless-stopped
+
+  studyapp:
+    # image: dinobehrem/study-app:1.0.3@sha256:20426bc52e2381db067850e58eb857a58a22049dade06709d94ff7f881056137
+    image: time-test
+    ports:
+      - "127.0.0.1:${APP_PORT:-3001}:3000"
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: "0.5"
+          pids: 100
